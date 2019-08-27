@@ -26,7 +26,7 @@ func main() {
 		"caller", log.DefaultCaller,
 	)
 
-	rep := repository.NewRepository()
+	rep := repository.NewRepository(appConfig.ServerOpt.CacheCleanupInterval)
 	svc := service.NewService(rep)
 
 	app := application.NewApplication(svc, appConfig.HashSum, appConfig.ServerOpt, logger)

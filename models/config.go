@@ -3,9 +3,7 @@ package models
 import (
 	"crypto/sha256"
 	"io"
-	"io/ioutil"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/BurntSushi/toml"
@@ -20,7 +18,8 @@ type duration time.Duration
 // Config struct
 type Config struct {
 	ServerOpt ServerOpt `toml:"ServerOpt"`
-	HashSum   []byte
+
+	HashSum []byte
 }
 
 func (d *duration) UnmarshalText(text []byte) error {
@@ -31,9 +30,10 @@ func (d *duration) UnmarshalText(text []byte) error {
 
 // ServerOpt struct
 type ServerOpt struct {
-	ReadTimeout  duration
-	WriteTimeout duration
-	IdleTimeout  duration
+	ReadTimeout          time.Duration
+	WriteTimeout         time.Duration
+	IdleTimeout          time.Duration
+	CacheCleanupInterval time.Duration
 }
 
 // LoadConfig from path
@@ -44,11 +44,6 @@ func LoadConfig(c *Config) {
 	}
 
 	c.HashSum = GetHashSum()
-}
-
-func getCredential(path string) string {
-	c, _ := ioutil.ReadFile(path)
-	return strings.TrimSpace(string(c))
 }
 
 // GetHashSum of config file

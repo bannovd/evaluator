@@ -18,7 +18,7 @@ type Item struct {
 	Created time.Time
 }
 
-// New. Initializing a new memory cache
+// NewCache Initializing a new memory cache
 func NewCache(cleanupInterval time.Duration) *Cache {
 	items := make(map[string]Item)
 
@@ -34,7 +34,7 @@ func NewCache(cleanupInterval time.Duration) *Cache {
 	return &cache
 }
 
-// Set setting a cache by key
+// Add a cache item
 func (c *Cache) Add(key string, value interface{}) {
 	c.Lock()
 	defer c.Unlock()
@@ -67,6 +67,7 @@ func (c *Cache) storeAndRemoveItems() {
 	defer c.Unlock()
 
 	for k, _ := range c.items {
+		//Todo: create func for store 'k' using any provider (file, db, external api service, etc.)
 		delete(c.items, k)
 	}
 }
