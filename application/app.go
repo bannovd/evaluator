@@ -44,7 +44,7 @@ func (app *Application) initRoutes() {
 	app.r.Handle("/metrics", promhttp.Handler()).Methods(http.MethodGet)
 
 	// Catcher routes
-	app.r.Path("/api/v1/catch").HandlerFunc(app.CatchHandler).Methods(http.MethodPost)
+	app.r.Path("/api/v1/catch").HandlerFunc(app.CatchHandler) //.Methods(http.MethodPost)
 }
 
 // Start application

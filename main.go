@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/bannovd/evaluator/repository"
 	"os"
+	"time"
 
 	"github.com/go-kit/kit/log"
 
@@ -26,7 +27,7 @@ func main() {
 		"caller", log.DefaultCaller,
 	)
 
-	rep := repository.NewRepository(appConfig.ServerOpt.CacheCleanupInterval)
+	rep := repository.NewRepository(time.Duration(appConfig.ServerOpt.CacheCleanupInterval))
 	svc := service.NewService(rep)
 
 	app := application.NewApplication(svc, appConfig.HashSum, appConfig.ServerOpt, logger)

@@ -31,10 +31,10 @@ func (d *duration) UnmarshalText(text []byte) error {
 
 // ServerOpt struct
 type ServerOpt struct {
-	ReadTimeout          time.Duration
-	WriteTimeout         time.Duration
-	IdleTimeout          time.Duration
-	CacheCleanupInterval time.Duration
+	ReadTimeout          duration
+	WriteTimeout         duration
+	IdleTimeout          duration
+	CacheCleanupInterval duration
 }
 
 // LoadConfig from path

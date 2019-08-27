@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/bannovd/evaluator/cache"
 	"github.com/bannovd/evaluator/models"
+
 	"strconv"
 	"time"
 )
@@ -14,7 +15,7 @@ type Repository struct {
 
 // NewRepository return new repository
 func NewRepository(cacheCleanupInterval time.Duration) *Repository {
-	c := cache.NewCache(cacheCleanupInterval)
+	c := cache.NewCachedDb(cacheCleanupInterval)
 
 	return &Repository{
 		cache: c,

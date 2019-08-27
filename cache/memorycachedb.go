@@ -1,6 +1,9 @@
 package cache
 
 import (
+	"fmt"
+	"github.com/bannovd/evaluator/models"
+	"os"
 	"sync"
 	"time"
 )
@@ -18,8 +21,8 @@ type Item struct {
 	Created time.Time
 }
 
-// NewCache Initializing a new memory cache
-func NewCache(cleanupInterval time.Duration) *Cache {
+// NewCachedDb Initializing a new memory cache
+func NewCachedDb(cleanupInterval time.Duration) *Cache {
 	items := make(map[string]Item)
 
 	cache := Cache{
@@ -66,8 +69,22 @@ func (c *Cache) storeAndRemoveItems() {
 	c.Lock()
 	defer c.Unlock()
 
-	for k, _ := range c.items {
-		//Todo: create func for store 'k' using any provider (file, db, external api service, etc.)
+	path := "data.csv"
+
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
+	if err != nil {
+		if os.IsNotExist(err) {
+			fmt.Print("File Does Not Exist: ")
+		}
+		fmt.Println(err)
+	}
+	defer file.Close()
+
+	for k, v := range c.items {
+		hit := v.Value.(models.Hit)
+		_, err = file.WriteString(fmt.Sprintf("%s;%s\n", hit.Type, hit.Value))
 		delete(c.items, k)
 	}
+
+	_ = file.Sync()
 }
