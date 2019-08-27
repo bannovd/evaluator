@@ -1,0 +1,4 @@
+[ServerOpt]
+  ReadTimeout = "5s"
+  WriteTimeout = "5s"
+  IdleTimeout = "5s"
