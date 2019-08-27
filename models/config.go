@@ -22,6 +22,7 @@ type Config struct {
 	HashSum []byte
 }
 
+// UnmarshalText func
 func (d *duration) UnmarshalText(text []byte) error {
 	temp, err := time.ParseDuration(string(text))
 	*d = duration(temp)
