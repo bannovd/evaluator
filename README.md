@@ -1,7 +1,7 @@
 # evaluator
 Test task. Like Measurement Protocol (GA) service.
 
-Необходимо реализовать сервис на Golang для сбора пользовательских метрик метрик (очень простой аналог Google Analytics (Measurement Protocol)). 
+Необходимо реализовать сервис на Golang для сбора пользовательских метрик (очень простой аналог Google Analytics (Measurement Protocol)). 
 
 
 * Метрики отсылаются по HTTP с различных других подсистем (в том числе с клиентских браузеров и приложений) часто
