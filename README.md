@@ -14,3 +14,9 @@ Test task. Like Measurement Protocol (GA) service.
 Хорошо, если ваше решение будет:
 * Тестируемое
 * Держать нагрузку
+
+Пример запроса для отладки http://localhost:8080/api/v1/catch?t=event&val=7555 
+
+Сбрасывает накопленный кэш в data.csv
+
+Продолжительность кеширования конфигурируется в config.toml
